@@ -1,0 +1,486 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>结算</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<style>
+			body {
+				background-color: #F7F7F7;
+			}
+			
+			.jsmain {
+				margin-top: 44px;
+			}
+			
+			.jsmain h3 {
+				font-weight: normal;
+				font-size: 16px;
+				height: 40px;
+				line-height: 40px;
+				color: #8f8f94;
+			}
+			
+			.jsx {
+				background-color: #fff;
+				padding: 0 10px;
+				;
+			}
+			
+			.jsx input {
+				color: #ccc;
+				border-color: #F7F7F7;
+				font-size: 15px;
+			}
+			
+			.dtop,
+			.dbottom {
+				border-bottom: none;
+			}
+			
+			.pd {
+				margin-top: 25px;
+			}
+			
+			.peisong {
+				height: 40px;
+				line-height: 40px;
+				background-color: #fff;
+			}
+			
+			.you {
+				color: #666;
+				font-size: 10px;
+			}
+			
+			.mui-pull-left {
+				color: #777777;
+				font-size: 15px;
+			}
+			
+			.choose-pay {
+				border-bottom: 1px solid #C7C7CC;
+				line-height: 40px;
+				margin-bottom: 15px;
+				width: 100%;
+			}
+			
+			.pay-methord table {}
+			
+			.mui-input-row .mui-btn+input,
+			.mui-input-row label+input,
+			.mui-input-row:last-child {
+				width: 100%;
+				padding-bottom: 20px;
+				background-color: #F7F7F7;
+			}
+			
+			.mui-input-row .areawrap {
+				width: 90%;
+				margin: 0 auto;
+				height: 80px;
+			}
+			
+			.mui-input-row textarea {
+				font-size: 14px;
+				height: 80px;
+			}
+			
+			.liuyan {
+				line-height: 20px;
+				margin-bottom: 0px;
+				margin-top: 10px;
+				margin-left: 17px;
+				color: #000;
+			}
+			
+			.peisong {
+				padding: 0 10px;
+			}
+			
+			.jiesuan {
+				background-color: #21a900;
+				color: #fff;
+				width: 90px;
+				font-size: 16px;
+			}
+			
+			.setbottom {
+				margin-top: 20px;
+			}
+			
+			.methord {
+				padding-bottom: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">结算</h1>
+		</header>
+
+		<div class='jsmain'>
+			<div class="jsx">
+				<h3 class='mui-text-center'>收货人信息</h3>
+				<input type="text" placeholder="真实姓名" id="realName" />
+				<input type="text" placeholder="手机号码" id="mobile" />
+				<input type="text" placeholder="详细地址" id="address" />
+			</div>
+
+			<ul class="mui-table-view pd">
+				<!--<h1></h1>-->
+				<li class="mui-table-view-cell" id="liPro">
+					<div class="dtop">
+						<span class="mui-pull-left">订单产品</span>
+					</div>
+					<!--<div class="dmain">
+						<ul class="mui-table-view ml" >
+							<li class="mui-table-view-cell mui-media myli">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="images/food1.gif">
+									<div class="mui-media-body">
+										<p class="mui-ellipsis">秘制香辣煲（信息学院路店）</p>
+									</div>
+									<div class="mui-pull-right">
+										<p class='text-active'>￥188</p>
+										<p class='mui-text-right'>x1</p>
+									</div>
+								</a>
+							</li>
+							
+						</ul>
+					</div>
+					<div class="dmain">
+						<ul class="mui-table-view ml">
+							<li class="mui-table-view-cell mui-media myli">
+								<a href="javascript:;">
+									<img class="mui-media-object mui-pull-left" src="images/food1.gif">
+									<div class="mui-media-body">
+										<p class="mui-ellipsis">秘制香辣煲（信息学院路店）</p>
+									</div>
+									<div class="mui-pull-right">
+										<p class='text-active'>￥188</p>
+										<p class='mui-text-right'>x1</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>-->
+					<div class="dbottom">
+						<span class='mui-pull-right'><i class='total'>合计:</i>￥0</span>
+					</div>
+
+				</li>
+			</ul>
+
+			<div class='methord'>
+				<ul class="pay-methord" id="payment-list" style="padding-bottom:80px;padding-left:0px;padding-bottom: 20px;">
+					<li class="choose-pay mui-pull-left">配送方式</li>
+
+					<table cellpadding="0" cellspacing="0" style="border:1px #e0e0e0 solid; width:100%;">
+
+						<tr height="40">
+							<td width="10%" class="zuo">
+								<input name="pickupType" type="radio" value="1" style=" margin-left:10px;"></td>
+							<td width="90%" class="you">
+								<font style=" height:20px; line-height:20px; margin-left:10px;" id="freightRateContent">
+									<!--商家配送。订单金额满50元免费配送，50元以下订单配送费5元。-->
+								</font>
+							</td>
+						</tr>
+
+						<tr height="40">
+							<td width="10%" class="zuo">
+								<input name="pickupType" type="radio" value="2" checked="checked" style=" margin-left:10px;"></td>
+							<td width="90%" class="you">
+								<font style=" height:20px; line-height:20px; margin-left:10px;">
+									上门自提，费用0元，需自提的用户，你需提前一天与我公司联系，约定取货时间
+								</font>
+							</td>
+						</tr>
+					</table>
+					<div class="mui-input-row" style="">
+						<p class="liuyan">买家留言:</p>
+						<div class="areawrap">
+							<textarea id="remark" rows="5"></textarea>
+						</div>
+					</div>
+
+				</ul>
+				<div class="mui-table-view pd peisong">
+					<span class="mui-pull-left">配送补费</span>
+					<span class="mui-pull-right" id="freightRate" data-value="0">￥0.00</span>
+				</div>
+				<div class="mui-table-view pd peisong">
+					<span class="mui-pull-left" id="availableBalance">可使用余额：￥0.00</span>
+					<span class="mui-pull-right" id="useBalance">使用余额：￥0.00</span>
+				</div>
+				<div class="setbottom peisong">
+					<span class="mui-pull-left">总金额：<i class="text-active" data-value="0" id="totalAmount">￥0.00</i></span>
+					<span class="mui-btn mui-pull-right jiesuan" id="btnSettlement">提交订单</span>
+					<input type="hidden" id="orderAmount" />
+					<input type="hidden" id="deliveryFee" value="0" />
+					<input type="hidden" id="minimumAmount"  value="0"/>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var myPlus,
+					activeTab = 'settlement.html',
+					serverUrl = app.getServerUrl();
+
+				$.init({
+					beforeback: function() {
+						var self = plus.webview.currentWebview();
+						var intrance = self.extras.intrance || 'index.html';
+						app.preateHide(intrance, self.extras);
+						return true;
+					}
+				});
+
+				$.plusReady(function() {
+					myPlus = plus;
+					loadData();
+				});
+				//
+				window.addEventListener('show', function() {
+					loadData();
+				}, false);
+
+				//加载数据
+				var loadData = function() {
+					if(!myPlus) {
+						$.plusReady(function() {
+							myPlus = plus;
+							loadData();
+						});
+						return;
+					}
+					var $state = app.getState();
+					var self = myPlus.webview.currentWebview();
+
+					var initData = function(response) {
+						if(response.status == true && response.data) {
+							// 用户信息
+							doc.getElementById("realName").value = response.data.member.realName;
+							doc.getElementById("mobile").value = response.data.member.mobile;
+							doc.getElementById("address").value = response.data.member.address;
+							// 配送费
+							doc.getElementById("freightRateContent").innerHTML = '商家配送。订单金额满' +
+								response.data.minimumAmount.toFixed(2) + '元免费配送，' + response.data.minimumAmount.toFixed(2) +
+								'元以下订单配送费' + response.data.freightRate.toFixed(2) + '元。';
+							doc.getElementById('minimumAmount').value = response.data.minimumAmount.toFixed(2);
+							doc.getElementById('deliveryFee').value = response.data.freightRate.toFixed(2);
+							// 订单商品
+							var liPro = doc.getElementById("liPro");
+							liPro.removeChild(doc.querySelector('.dbottom'));
+							$('.dmain').each(function(index, item) {
+								liPro.removeChild(item);
+							});
+
+							var proList = response.data.list;
+							for(var i = 0; i < proList.length; i++) {
+								var div = doc.createElement('div');
+								div.className = 'dmain';
+								var li = doc.createElement('li');
+								li.className = 'mui-table-view-cell mui-media myli';
+								debugger;
+								var html = '<a href="javascript:void(0);" data-id="' + proList[i].id + '" data-pro="' +
+									proList[i].productId + '" data-detail="' + proList[i].proSpecDetailId + '" data-num="' + 
+									proList[i].purchaseQuantity + '" data-price="'+proList[i].discountPrice.toFixed(2)+'">';
+								html += '<img class="mui-media-object mui-pull-left" src="' + serverUrl + proList[i].imgPath + '">';
+								html += '<div class="mui-media-body"><p class="mui-ellipsis">' + proList[i].proName + '</p></div>';
+								html += '<div class="mui-pull-right"><p class="text-active">￥ ' + proList[i].discountPrice.toFixed(2) + '</p>';
+								html += '<p class="mui-text-right">×' + proList[i].purchaseQuantity + '</p></div></a>';
+
+								li.innerHTML = html;
+								div.appendChild(li);
+								liPro.appendChild(div);
+							}
+							//订单总金额 
+							var divAmount = doc.createElement('div');
+							divAmount.className = 'dbottom';
+							divAmount.innerHTML = '<span class="mui-pull-right"><i class="total">合计:</i>￥' + response.data.totalAmount.toFixed(2) + '</span>'; // 注册事件
+							liPro.appendChild(divAmount);
+							// 订单总金额 
+							doc.getElementById("totalAmount").innerHTML = '￥' + response.data.totalAmount.toFixed(2);
+							doc.getElementById('totalAmount').setAttribute('data-value',response.data.totalAmount.toFixed(2));
+							doc.getElementById('orderAmount').value = response.data.totalAmount.toFixed(2);
+							//可用余额
+							doc.getElementById('availableBalance').innerHTML = '可用余额：￥' + response.data.member.totalAmount.toFixed(2);
+							//使用余额
+							doc.getElementById('useBalance').innerHTML = '使用余额：￥' + response.data.useBalance.toFixed(2);
+							doc.getElementById('useBalance').setAttribute('data-value',response.data.useBalance.toFixed(2));
+							//取消事件
+							$(liPro).off('tap', 'a');
+							$(liPro).on('tap', 'a', function() {
+								var proId = this.getAttribute('data-pro');
+								var detailId = this.getAttribute('data-detail');
+								app.preateHide('pro_detail.html', { intrance: 'settlement.html', proId: proId, detailId: detailId });
+							});
+						} else {
+							mui.toast('查询错误！');
+						}
+					};
+					// 连接服务器，获取分类
+					$.ajax(serverUrl + "/api/ShopCar/GetSettlementData", {
+						data: {
+							memberId: $state.accountid,
+							proId: self.extras.proId,
+							specCode: self.extras.specCode,
+							purchaseQuantity: self.extras.purchaseQuantity,
+							shopCarList: self.extras.shopCarList
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: initData,
+						headers: {
+							"Authorization": "Bearer " + $state.token
+						},
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							app.onError(errorThrown);
+							//							myPlus.nativeUI.toast('加载结算信息失败');
+						}
+					});
+
+				};
+				// 注册选择配送方式事件
+				$('.zuo').on('tap', 'input', function() {
+					if(this.value === '1') {
+						
+						var orderAmount = parseFloat(doc.getElementById('orderAmount').value);
+						var deliveryFee = parseFloat(doc.getElementById('deliveryFee').value);
+						var minimumAmount = parseFloat(doc.getElementById('minimumAmount').value);
+						if(orderAmount < minimumAmount){
+							doc.getElementById('freightRate').innerHTML = '￥' + deliveryFee;
+							doc.getElementById('freightRate').setAttribute('data-value',deliveryFee);
+							
+							var totalAmount = orderAmount + deliveryFee;
+							
+							doc.getElementById('totalAmount').innerHTML = '￥' + totalAmount;
+							doc.getElementById('totalAmount').setAttribute('data-value',totalAmount);
+						}
+					} else if(this.value === '2') {
+						doc.getElementById('freightRate').innerHTML = '￥0.00';
+						doc.getElementById('freightRate').setAttribute('data-value',0);
+						doc.getElementById('totalAmount').innerHTML = '￥' + doc.getElementById('orderAmount').value;
+						doc.getElementById('totalAmount').setAttribute('data-value',doc.getElementById('orderAmount').value);
+					}
+				});
+
+				// 注册结算事件
+				doc.getElementById("btnSettlement").addEventListener('tap', function() {
+					var $state = app.getState();
+					var self = plus.webview.currentWebview();
+					var mobile = doc.getElementById('mobile').value;
+					var receiver = doc.getElementById('realName').value;
+					if(receiver === ''){
+						myPlus.nativeUI.toast('真实姓名不能为空！');
+						return;
+					}
+					
+					var address = doc.getElementById('address').value;
+					if(address === ''){
+						myPlus.nativeUI.toast('详细地址不能为空！');
+						return;
+					}
+					var remark = doc.getElementById('remark').value;
+					// 订单金额
+					var orderAmount = doc.getElementById('orderAmount').value;
+					// 配送费
+					var deliveryFee = doc.getElementById('freightRate').getAttribute('data-value');
+					// 余额
+					var recharge = doc.getElementById('useBalance').getAttribute('data-value');
+					// 支付金额
+					var realAmount = doc.getElementById('totalAmount').getAttribute('data-value');
+					// 配送方式
+					var pickupType = getValue();
+					// 遍历订单商品
+					var shopCarList = [];
+					$('.dmain li a').each(function() {
+						debugger;
+						var $this = this;
+						var id = parseInt($this.getAttribute('data-id'));
+						var num = parseInt($this.getAttribute('data-num'));
+						var price = parseFloat($this.getAttribute('data-price'));
+						var proId = parseInt($this.getAttribute('data-pro'));
+						var detailId = parseInt($this.getAttribute('data-detail'));
+
+						shopCarList.push({ Id: id, ProductId: proId, ProSpecDetailId: detailId, PurchaseQuantity: num, SalePrice: price });
+					});
+					shopCarList = JSON.stringify(shopCarList);
+					// 提交订单
+					$.ajax(serverUrl + "/api/ShopCar/AddOrder", {
+						data: JSON.stringify({
+							memberId: $state.accountid,
+							orderAmount: orderAmount,
+							deliveryFee: deliveryFee,
+							recharge: recharge,
+							realAmount: realAmount,
+							realName: receiver,
+							mobile: mobile,
+							address: address,
+							remark: remark,
+							pickupType:pickupType,
+							shopCarList: shopCarList
+						}),
+						contentType: 'application/json',
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						headers: {
+							"Authorization": "Bearer " + $state.token
+						},
+						timeout: 10000, //超时时间设置为10秒；
+						success: function(response) {
+							if(response.status === true) {
+								if(response.data.realAmount === 0) {
+									app.preateHide('myorder.html', {});
+								}
+								// 跳转到支付页面
+								var data = {};
+								data.intrance = 'myorder.html';
+								data.orderCode = response.data.orderCode;
+								data.orderAmount = response.data.realAmount;
+								data.orderId = response.data.id;
+								debugger;
+								app.preateHide('pay.html', data);
+							}else{
+								myPlus.nativeUI.toast('提交订单错误');
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							app.onError(errorThrown);
+							//							myPlus.nativeUI.toast('操作失败');
+						}
+					});
+
+				});
+				// 获取选中的配送方式
+				function getValue(){  
+				    // method 1   
+				    var radio = document.getElementsByName("pickupType");  
+				    for (i=0; i<radio.length; i++) {  
+				        if (radio[i].checked) {  
+				            return radio[i].value;  
+				        }  
+				    } 
+				    return '1';
+				}  
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

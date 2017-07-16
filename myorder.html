@@ -1,0 +1,364 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		<style>
+			.mui-segmented-control .mui-control-item {
+				display: table-cell;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的订单</h1>
+		</header>
+
+		<div class="mui-content">
+			<div style="padding: 10px 10px;">
+				<div id="segmentedControl" class="mui-segmented-control">
+					<a class="mui-control-item mui-active" href="#item1" data-id="-2">
+						全部
+					</a>
+					<a class="mui-control-item" href="#item1" data-id="1">
+						待付款
+					</a>
+					<a class="mui-control-item" href="#item1" data-id="2">
+						待发货
+					</a>
+					<a class="mui-control-item" href="#item1" data-id="3">
+						待收货
+					</a>
+					<a class="mui-control-item" href="#item1" data-id="4">
+						已关闭
+					</a>
+				</div>
+			</div>
+			<div>
+				<div id="item1" class="mui-control-content mui-active">
+
+					<ul class="mui-table-view" id="ulOrder">
+						<!--<h1></h1>-->
+						<!--<li class="mui-table-view-cell">
+							<div class="dtop">
+								<span class='mui-pull-left'>订单号：20170310175526</span>
+								<span class='mui-pull-right'>未付款</span>
+							</div>
+							<div class="dmain">
+								<ul class="mui-table-view ml">
+									<li class="mui-table-view-cell mui-media myli">
+										<a href="javascript:;">
+											<img class="mui-media-object mui-pull-left" src="images/food1.gif">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis">秘制香辣煲（信息学院路店）</p>
+											</div>
+											<div class="mui-pull-right">
+												<p class='text-active'>￥188</p>
+												<p class='mui-text-right'>x1</p>
+											</div>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+							<div class="dbottom">
+								<span class='mui-pull-left'>2017-3-20</span>
+								<span class='mui-pull-right'><i class='total'>合计:</i>￥188</span>
+							</div>
+							<div class="dpay mui-pull-right">
+								<button type="button" class="mui-btn canel">取消订单</button>
+								<button type="button" class="mui-btn pm">去付款</button>
+							</div>
+						</li>-->
+						<!--<h1></h1>-->
+						<!--<li class="mui-table-view-cell">
+							<div class="dtop">
+								<span class='mui-pull-left'>订单号：20170310175526</span>
+								<span class='mui-pull-right'>未付款</span>
+							</div>
+							<div class="dmain">
+								<ul class="mui-table-view ml">
+									<li class="mui-table-view-cell mui-media myli">
+										<a href="javascript:;">
+											<img class="mui-media-object mui-pull-left" src="images/food1.gif">
+											<div class="mui-media-body">
+												<p class="mui-ellipsis">秘制香辣煲（信息学院路店）</p>
+											</div>
+											<div class="mui-pull-right">
+												<p class='text-active'>￥188</p>
+												<p class='mui-text-right'>x1</p>
+											</div>
+										</a>
+									</li>
+
+								</ul>
+							</div>
+							<div class="dbottom">
+								<span class='mui-pull-left'>2017-3-20</span>
+								<span class='mui-pull-right'><i class='total'>合计:</i>￥188</span>
+							</div>
+							<div class="dpay mui-pull-right">
+								<button type="button" class="mui-btn canel">取消订单</button>
+								<button type="button" class="mui-btn pm">去付款</button>
+							</div>
+						</li>-->
+
+					</ul>
+
+				</div>
+
+			</div>
+
+		</div>
+		<div class="mui-content-padded mui-text-center" style="height:100px;">
+			<ul class="mui-pagination mui-pagination-sm" id="dvpager" style="padding-top: 15px;">
+				
+			</ul>
+		</div>
+		<!--footer-->
+		<nav class="mui-bar mui-bar-tab bottom">
+			<a data-id='index.html' class="mui-tab-item mui-active">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a data-id='cate.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
+				<span class="mui-tab-label">分类</span>
+			</a>
+			<a data-id='culture.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-chatboxes"></span>
+				<span class="mui-tab-label">资讯</span>
+			</a>
+			<a data-id='shopcar.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a data-id='member.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/app.js" ></script>
+		<script type="text/javascript" src="js/laypage.js" ></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var myPlus, 
+				activeTab = 'myorder.html',
+				serverUrl = app.getServerUrl();
+				
+				$.init({
+					beforeback: function() {
+						app.preateHide('member.html',{});
+						return true;
+					}
+				});
+
+				$.plusReady(function() {
+					myPlus = plus;
+					app.MenuInit(activeTab);
+					loadData('-2');
+				});
+				// 自定义事件
+				window.addEventListener('show', function() {
+					location.reload();
+				}, false);
+
+				// 注册切换标签事件
+				$('#segmentedControl').on('tap', 'a', function() {
+					console.log(this.getAttribute('data-id'));
+					loadData(this.getAttribute('data-id'));
+				});
+				//加载数据
+				var loadData = function(status,pageIndex,pageSize) {
+					if(!myPlus) {
+						$.plusReady(function() {
+							myPlus = plus;
+							app.MenuInit(activeTab);
+							loadData(status,pageIndex,pageSize);
+						});
+
+						return;
+					}
+					var $state = app.getState();
+					var self = myPlus.webview.currentWebview();
+					var initData = function(response) {
+
+						if(response.status === true && response.data) {
+							var ulOrder = doc.getElementById('ulOrder');
+							ulOrder.innerHTML = '';
+							//订单信息
+							var list = response.data.list;
+
+							// 订单明细信息
+							var details = response.data.details;
+
+							//初始化订单信息
+							for(var i = 0; i < list.length; i++){
+								var li = doc.createElement('li');
+								li.className = 'mui-table-view-cell';
+								var div = doc.createElement('div');
+								div.className='dtop';
+								
+								var htmlStatu = '';
+								var htmlButn = '';
+								if(list[i].status === 1){
+									htmlStatu = '<span class="mui-pull-right">待付款</span>';
+								}else if(list[i].status === 2){
+									htmlStatu = '<span class="mui-pull-right">待发货</span>';
+								}else if(list[i].status === 3){
+									htmlStatu = '<span class="mui-pull-right">待收货</span>';
+								}else if(list[i].status === 4){
+									htmlStatu = '<span class="mui-pull-right">已关闭</span>';
+								}
+								
+								div.innerHTML = '<span class="mui-pull-left">订单号：' + list[i].orderCode + '</span>' +htmlStatu;
+								li.appendChild(div);
+								// 加载订单商品
+								div = doc.createElement('div');
+								div.className='dmain';
+								var ul = doc.createElement('ul');
+								ul.className = 'mui-table-view ml';
+								for (var j = 0; j < details.length; j++) {
+									if(details[j].orderId === list[i].id){
+										var lis = doc.createElement('li');
+										lis.className = 'mui-table-view-cell mui-media myli';
+										var html = '<a href="javascript:void(0);" data-id="'+details[j].productId+'" data-detail="'+details[j].proSpecId+'">';
+										html +='<img class="mui-media-object mui-pull-left" src="'+serverUrl +details[j].imgPath+'">';
+										html +='<div class="mui-media-body"><p class="mui-ellipsis">' + details[j].proName + details[j].specName+'</p></div>';
+										html +='<div class="mui-pull-right"><p class="text-active">￥' + details[j].salePrice+'</p>';
+										html +='<p class="mui-text-right"">x' + details[j].quantity + '</p></div></a>';
+										
+										lis.innerHTML = html;
+										
+										ul.appendChild(lis);
+									}
+								}
+								div.appendChild(ul);
+								li.appendChild(div);
+								// 订单合计
+								div = doc.createElement('div');
+								div.className='dbottom';
+								div.innerHTML = '<span class="mui-pull-left">'+list[i].createTime.split('.')[0].replace('T',' ')+'</span><span class="mui-pull-right"><i class="total">合计:</i>￥'
+								+list[i].realAmount.toFixed(2)+'</span>';
+								li.appendChild(div);
+								//按钮
+								if(list[i].status === 1 || list[i].status === 2){
+									div = doc.createElement('div');
+									div.className = 'dpay mui-pull-right';
+									var html = '<button type="button" class="mui-btn cancel" data-id="'+list[i].id+'">取消订单</button>';
+									if(list[i].status === 1){
+										html +='<button type="button" class="mui-btn pm" data-id="'+list[i].id+'" data-code="'+list[i].orderCode+'" data-amount="'+list[i].realAmount+'">去付款</button>';
+									}
+									div.innerHTML = html;
+									li.appendChild(div);
+								}
+								
+								ulOrder.appendChild(li);
+							}
+							
+							// 加载分页
+							laypage({
+							    cont: 'dvpager',
+							    curr:pageIndex,
+							    pages: response.data.totalPages,
+							    groups:1,
+							    first:false,
+							    last:false,
+							    skin: '#21a900',
+							    jump: function(obj,first){
+							    	if(!first){
+							        	loadData(status,obj.curr,10);
+							    	}
+							    }
+							});
+							// 注册商品明细页面
+							$(li).on('tap', 'a', function() {
+								var proId = this.getAttribute('data-pro');
+								var detailId = this.getAttribute('data-detail');
+								app.preateHide('pro_detail.html', { intrance: 'pro_detail.html', proId: proId, detailId: detailId });
+							});
+							// 注册取消订单
+							$('.dpay').on('tap','.mui-btn',function(){
+								var orderId = this.getAttribute('data-id');
+								var orderCode = this.getAttribute('data-code');
+								var orderAmount = this.getAttribute('data-amount');
+
+								if(app.hasClass(this,'cancel')){
+									cancelOrder(orderId);
+								}else{
+									app.preateHide('pay.html',{intrance:'myorder.html',orderCode:orderCode,orderAmount:orderAmount,orderId:orderId});
+								}
+							});
+							
+							// 取消订单
+							var cancelOrder = function(orderId){
+								var $state = app.getState();
+								// 连接服务器，取消订单
+								$.ajax(serverUrl + "/api/MallMember/CancelOrder", {
+									data: JSON.stringify({
+										orderId: orderId
+									}),
+									contentType: 'application/json',
+									dataType: 'json', //服务器返回json格式数据
+									type: 'post', //HTTP请求类型
+									timeout: 10000, //超时时间设置为10秒；
+									headers: {
+										"Authorization": "Bearer " + $state.token
+									},
+									success: function(response){
+										if(response.status === true){
+											loadData('-2'); //刷新
+										}else{
+											myPlus.nativeUI.toast('取消订单失败！');
+										}
+									},
+									error: function(xhr, type, errorThrown) {
+										console.log(errorThrown);
+										app.onError(errorThrown);
+										myPlus.nativeUI.toast('取消订单失败');
+									}
+								});
+							};
+							// 付款
+						} else {
+							mui.toast('查询错误！');
+						}
+					};
+					// 连接服务器，获取分类
+					$.ajax(serverUrl + "/api/MallMember/GetOrderPages", {
+						data: {
+							memberId: $state.accountid,
+							pageIndex:pageIndex || 1,
+							pageSize:pageSize || 10,
+							status: status || -2
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: initData,
+						headers: {
+							"Authorization": "Bearer " + $state.token
+						},
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							app.onError(errorThrown);
+//							myPlus.nativeUI.toast('加载订单信息失败');
+						}
+					});
+
+				};
+
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

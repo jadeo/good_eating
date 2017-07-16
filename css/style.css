@@ -1,0 +1,265 @@
+.ui-page-login,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	font-family: "微软雅黑";
+}
+
+.mui-content {
+	height: 100%;
+}
+
+ul li {
+	list-style: none;
+}
+
+.mui-table-view {
+	padding-bottom: 50px;
+}
+
+.mui-bar-nav {
+	background-color: #21a900;
+}
+
+.mui-bar-nav .mui-title {
+	color: #fff;
+}
+
+.mui-bar-nav .mui-action-back {
+	color: #fff;
+}
+
+.mui-ellipsis .now {
+	color: orangered;
+	font-size: 16px;
+}
+
+.mui-ellipsis .pre {
+	text-decoration: line-through;
+	font-style: normal;
+}
+
+.mui-ellipsis .ys {
+	float: right;
+}
+
+.pb {
+	margin-top: 10px;
+}
+
+.cb {
+	overflow: hidden;
+}
+
+.cb .cb_left {
+	float: left;
+	width: 39%;
+	min-height: 175px;
+	box-sizing: border-box;
+	background-color: #fff;
+}
+
+.cb .cb_left img {
+	width: 100%;
+	min-height: 85px;
+}
+
+.cb .cb_right {
+	width: 61%;
+	float: left;
+	min-height: 85px;
+	box-sizing: border-box;
+}
+
+.cb .cb_right .cbr_top img {
+	width: 100%;
+	float: right;
+	border-bottom: 1px solid #ccc;
+}
+
+.cb .cb_right .cbr_bottom .m1 {
+	width: 51%;
+	float: left;
+}
+
+.cb .cb_right .cbr_bottom .m2 {
+	width: 49%;
+	float: left;
+}
+
+.mui-content {
+	background-color: #fff;
+}
+
+.mui-segmented-control .mui-control-item.mui-active {
+	color: orangered;
+	background-color: transparent;
+}
+
+.mui-segmented-control {
+	color: #666;
+	border: none;
+}
+
+.mui-segmented-control .mui-control-item {
+	border-left: none;
+	color: #666;
+	font-size: 14px;
+}
+
+.dtop,
+.dbottom {
+	font-size: 14px;
+	color: #666;
+	height: 40px;
+	line-height: 40px;
+	border-bottom: 1px solid #f7f7f7;
+}
+
+
+/*.mui-table-view-cell{
+				padding-top:0;
+				padding-bottom:20px;
+			}*/
+
+.mui-pull-right {
+	color: orangered;
+}
+
+.mui-table-view-cell>a:not(.mui-btn) {
+	margin: 0;
+}
+
+.dmain .myli {
+	padding: 0;
+	border-bottom: none;
+}
+
+.dbottom {
+	font-size: 16px;
+}
+
+.dbottom .total {
+	font-style: normal;
+	color: #666;
+}
+
+.dmain .ml {
+	padding: 10px 0;
+	/*border-bottom: 1px dotted #ccc;*/
+}
+
+.dmain .mui-media-body {
+	display: inline-block;
+}
+
+.dmain .text-active {
+	color: orangered;
+}
+
+.dpay {
+	padding-top: 10px;
+}
+
+.dpay .pm {
+	border: 1px solid red;
+	color: red;
+	margin-left: 5px;
+}
+
+.mui-btn,
+button,
+input[type=button],
+input[type=reset],
+input[type=submit] {
+	font-size: 12px;
+}
+
+.mui-table-view h1 {
+	height: 10px;
+	background-color: #f7f7f7;
+	margin-top: 0px;
+	margin-bottom: 0px
+}
+
+.canel {
+	color: #ccc;
+}
+
+.mui-table-view {
+	padding-bottom: 0;
+}
+
+.mui-pagination>li>a,
+.mui-pagination>li>span {
+	color: #21a900;
+}
+
+.mui-pagination>li.mui-active>a {
+	color: red;
+	background-color: #fff;
+	border-color: #ddd;
+}
+
+.mui-content-padded {
+	background-color: #fff;
+	height: 200px;
+	margin-left: 0;
+	margin-right: 0;
+	font-size: .8rem;
+}
+
+.mui-content-padded ul {
+	padding-top: 30px;
+}
+
+.methord {
+	padding: 0 10px;
+	background-color: #fff;
+	font-size: 16px;
+}
+
+.choose-pay {
+	height: 40px;
+	line-height: 40px;
+}
+
+tr {
+	border-bottom: 1px solid #ccc;
+}
+
+.zuo {
+	border-right: 1px solid #ccc;
+}
+
+.mui-btn-block {
+	padding: 5px 0;
+	background-color: #21a900;
+	margin: 10px auto;
+	width: 94%;
+	font-size: 17px;
+}
+
+.text-active {
+	color: red;
+	font-style: normal;
+}
+
+.mui-table-view-cell>a:not(.mui-btn) {
+	padding: 0;
+}
+
+.mui-pagination>li>a,
+.mui-pagination>li>span {
+	border: none;
+}
+
+.bottom {
+	background-color: #fff;
+}
+
+.mui-bar-tab .mui-tab-item.mui-active {
+	color: #929292;
+}

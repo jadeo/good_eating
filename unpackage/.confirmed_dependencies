@@ -1,0 +1,140 @@
+{
+	"index.html": {
+		"resources": [
+			"fonts/mui-icons-extra.ttf",
+			"js/app.js",
+			"js/mui.min.js",
+			"images/logo.gif",
+			"fonts/mui.ttf",
+			"images/search.gif",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/mui.lazyload.js",
+			"css/icons-extra.css",
+			"js/mui.lazyload.img.js",
+			"images/logo.png"
+		],
+		"refer": [
+			"member.html",
+			"pro_detail.html",
+			"prolist.html"
+		]
+	},
+	"member.html": {
+		"resources": [
+			"images/tb37.png",
+			"images/tb31.png",
+			"images/tb35.png",
+			"images/dface.jpg",
+			"images/tb28.png",
+			"images/tb32.png",
+			"images/tb23.png"
+		],
+		"refer": [
+			"login.html",
+			"myorder.html"
+		]
+	},
+	"login.html": {
+		"resources": [
+			"css/login.css",
+			"js/md5.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"regist.html"
+		]
+	},
+	"regist.html": {
+		"resources": [
+			"js/app.js",
+			"js/mui.min.js",
+			"css/login.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/md5.js"
+		]
+	},
+	"pro_detail.html": {
+		"resources": [
+			"fonts/mui-icons-extra.ttf",
+			"css/style.css",
+			"css/icons-extra.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": [
+			"login.html",
+			"shopcar.html",
+			"settlement.html"
+		]
+	},
+	"prolist.html": {
+		"resources": [
+			"fonts/mui-icons-extra.ttf",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/mui.lazyload.js",
+			"css/icons-extra.css",
+			"js/mui.lazyload.img.js"
+		],
+		"refer": [
+			"pro_detail.html",
+			"member.html"
+		]
+	},
+	"shopcar.html": {
+		"refer": [
+			"settlement.html"
+		],
+		"resources": [
+			"fonts/mui.ttf",
+			"css/icons-extra.css"
+		]
+	},
+	"settlement.html": {
+		"refer": [
+			"pay.html"
+		],
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf"
+		]
+	},
+	"pay.html": {
+		"resources": [
+			"images/f2.png",
+			"images/f1.png"
+		],
+		"refer": [
+			"myorder.html"
+		]
+	},
+	"myorder.html": {
+		"resources": [
+			"js/laypage.js",
+			"js/laypage.css",
+			"fonts/mui-icons-extra.ttf",
+			"js/app.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"css/icons-extra.css"
+		],
+		"refer": [
+			"pay.html"
+		]
+	}
+}

@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		
+		<link rel="stylesheet" href="css/style.css" />
+		<style>
+			body{
+				background-color: #fff;
+			}
+			.mui-input-group{
+				margin-top: 44px;
+				padding-top:20px;
+				
+				font-size:16px;
+			}
+			.mui-input-row label{
+				color:#000000;
+			}
+			.mui-input-row input{
+				font-size:15px;
+				color:#000;
+			}
+			.save{
+				color:#fff;
+				height: 40px;;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">个人资料</h1>
+		</header>
+		
+		<form class="mui-input-group">
+			<div class="mui-input-row">
+				<label>手机</label>
+				<input type="text" placeholder="手机" readonly="readonly" id="mobile">
+			</div>
+			<div class="mui-input-row">
+				<label>姓名</label>
+				<input type="text" placeholder="请输入联系人姓名" id="realName">
+			</div>
+			<div class="mui-input-row">
+				<label>地址</label>
+				<input type="text" placeholder="地址" id="address">
+			</div>
+		</form>		
+		
+		<button type="button" class="mui-btn mui-btn-block save" id="saveBtn">保存</button>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/app.js" ></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var myPlus,
+				serverUrl = app.getServerUrl();
+				
+				$.init({
+					beforeback: function() {
+						app.preateHide('member.html', {});
+						return true;
+					}
+				});
+				// 
+				$.plusReady(function(){
+					myPlus = plus;
+					loadData();
+				});
+				// 自定义事件
+				window.addEventListener('show', function() {
+					loadData();
+				}, false);
+				
+				//加载数据
+				var loadData = function() {
+					if(!myPlus) {
+						$.plusReady(function() {
+							myPlus = plus;
+							loadData();
+						});
+
+						return;
+					}
+					var $state = app.getState();
+
+					var initData = function(response) {
+						if(response.status == true && response.data) {
+							doc.getElementById('realName').value = response.data.realName;
+							doc.getElementById('mobile').value = response.data.mobile;
+							doc.getElementById('address').value = response.data.address;
+						} else {
+							mui.toast('查询用户信息错误！');
+						}
+					};
+					// 连接服务器
+					mui.ajax(serverUrl + "/api/MallBase/GetMemberInfo", {
+						data: {
+							userId: !$state.accountid ? 0 : $state.accountid
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						headers: {
+							"Authorization": "Bearer " + $state.token
+						},
+						success: initData,
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							app.onError(errorThrown);
+//							myPlus.nativeUI.toast('获取用户信息失败');
+						}
+					});
+				};
+				// 保存事件
+				doc.getElementById('saveBtn').addEventListener('tap',function(){
+					var realName = doc.getElementById('realName').value;
+					var address = doc.getElementById('address').value;
+					
+					if(realName === ''){
+						myPlus.nativeUI.alert('姓名不能为空','提示');
+						return;
+					}
+					if(address === ''){
+						myPlus.nativeUI.alert('地址不能为空','提示');
+						return;
+					}
+					
+					$.ajax(serverUrl + '/api/mallmember/EditMemberInfo',{
+						data:{
+							memberId:$state.accountid,
+							realname:realName,
+							address:address
+						},
+						dataType:'json',
+						type:'post',
+						timeount:10000,
+						headers:{
+							'authorization':'Bearer ' + $state.token
+						},
+						success:function(response){
+							if(response.status === true){
+								app.preateHide('member.html',{});
+							}else{
+								myPlus.nativeUI.toast(response.data.message);
+							}
+						},
+						error:function(xhr,type,errorThrown){
+							console.log(errorThrown);
+							app.onError(errorThrown);
+//							myPlus.nativeUI.toast('保存个人资料失败');
+						}
+					});
+					
+				});
+				
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>商品列表</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		<style>
+			.mui-tab-item {
+				width: 20%;
+			}
+			
+			.mui-slider {
+				margin-top: 44px;
+			}
+			
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+				font-size: 12px;
+			}
+			
+			.mui-ellipsis {
+				font-size: 12px;
+			}
+			
+			.mui-media-body {
+				font-size: 14px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				max-width: 70px;
+				height: 70px;
+			}
+			
+			.mui-table-view {
+				padding-bottom: 60px;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				border-right: none;
+				border-bottom: none;
+			}
+			
+			.mui-table-view-cell img {
+				width: 65px;
+				height: 65px;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				padding: 0;
+			}
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body.category-select{
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- 主页面标题 -->
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="title">商品列表</h1>
+		</header>
+		<div id="slider" class="mui-slider">
+			<div class="mui-slider-group mui-slider-loop" id="dvloop">
+				<!--
+                	作者：feifei12021@sina.com
+                	时间：2017-04-25
+                	描述：轮播图
+                -->
+			</div>
+			<div class="mui-slider-indicator" id="dvindicator">
+				<!--
+                	作者：feifei12021@sina.com
+                	时间：2017-04-25
+                	描述：轮播点
+                -->
+			</div>
+		</div>
+
+		<ul class="mui-table-view mui-grid-view mui-grid-9" id="ulCategory" style="background-color: #fff;">
+			<!--
+            	作者：feifei12021@sina.com
+            	时间：2017-04-25
+            	描述：分类列表
+            -->
+			<!--<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+				<a href="#">
+					<span class=""><img src="images/taochan1.gif" alt="" /></span>
+					<div class="mui-media-body">血压高人群</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+				<a href="#">
+					<span class=""><img src="images/taochan1.gif" alt="" /></span>
+					<div class="mui-media-body">血脂高人群</div>
+				</a>
+			</li>
+			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
+				<a href="#">
+					<span class=""><img src="images/taochan1.gif" alt="" /></span>
+					<div class="mui-media-body">血糖高人群</div>
+				</a>
+			</li>-->
+
+		</ul>
+		
+		<ul class="mui-table-view" id="ulPro" >
+						
+			<!--<li class="mui-table-view-cell mui-media">
+				<a href="proxiang.html">
+					<img class="mui-media-object mui-pull-left" src="images/food1.gif">
+					<div class="mui-media-body">
+						秘制香辣鸡煲（信息学院路店）
+						<p class="mui-ellipsis">尽享香辣虾，美滋美味</p>
+						<p class="mui-ellipsis pb"><span class='now'>￥88</span> <span>门市价：<i class='pre'>￥108.00</i></span> <span class='ys'>已售118</span></p>
+
+					</div>
+				</a>
+			</li>-->
+			<!--
+            	作者：feifei12021@sina.com
+            	时间：2017-04-27
+            	描述：商品列表
+            -->
+		</ul>
+
+		<nav class="mui-bar mui-bar-tab bottom">
+			<a data-id='index.html' class="mui-tab-item mui-active">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a data-id='cate.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
+				<span class="mui-tab-label">分类</span>
+			</a>
+			<a data-id='culture.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-chatboxes"></span>
+				<span class="mui-tab-label">资讯</span>
+			</a>
+			<a data-id='shopcar.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a data-id='member.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/app.js" ></script>
+		<script type="text/javascript" src="js/mui.lazyload.js" ></script>
+		<script type="text/javascript" src="js/mui.lazyload.img.js" ></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var myPlus,
+				activeTab='prolist.html',
+				serverUrl = app.getServerUrl();
+				$.init({
+					beforeback:function(){
+						var self = plus.webview.currentWebview();
+						debugger;
+						var intrance = self.extras.intrance || 'index.html';
+					    app.preateHide(intrance,{});
+						return true;
+					},
+					gestureConfig:{
+						swiperight: true
+					}
+				});
+				var gallery = mui('.mui-slider');
+				gallery.slider({
+					interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+				});
+
+				$.plusReady(function() {
+					myPlus = plus;
+					app.MenuInit(activeTab);
+					loadData();
+				});
+				//
+				window.addEventListener('show', function() {
+					loadData();
+				}, false);
+				
+				//加载数据
+				var loadData = function(){
+					if(!myPlus){
+						$.plusReady(function(){
+							myPlus = plus;
+							app.MenuInit(activeTab);
+							loadData();
+						});
+						
+						return;
+					}
+					
+					var $state = app.getState();
+					var self = myPlus.webview.currentWebview();
+					var categoryId = self.extras.categoryId;
+					var searchKey = self.extras.searchKey;
+					
+					var initCategory = function(response){
+
+						if(response.status == true && response.data) {
+							// 加载滚动图
+							if(response.data.adList && response.data.adList.length > 0){
+								var dvloop = doc.getElementById("dvloop");
+								var dvindicator = doc.getElementById("dvindicator");
+								dvloop.innerHTML = '';
+								dvindicator.innerHTML = '';
+								
+								var adList = response.data.adList;
+								
+								var dv = doc.createElement('div');
+								dv.className='mui-slider-item mui-slider-item-duplicate';
+								dv.innerHTML='<a href="#"><img src="' +serverUrl+adList[0].imgPath+'"></a>';
+								dvloop.appendChild(dv);
+								
+								for (var i = 0; i< adList.length;i++) {
+									var dv1 = doc.createElement('div');
+									dv1.className='mui-slider-item';
+									dv1.innerHTML='<a href="#"><img src="'+serverUrl+adList[i].imgPath+'"></a>';
+									dvloop.appendChild(dv1);
+									
+									var dv2 = doc.createElement('div');
+									dv2.className='mui-indicator ' + (i === 0 ? 'mui-active' : '');
+									dvindicator.appendChild(dv2);
+								}
+								
+								dvloop.appendChild(dv);
+								
+								// 加载滚动图
+								var gallery = mui('.mui-slider');
+								gallery.slider({
+									interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+								});
+							}
+							// 加载分类
+							if(response.data.categoryList && response.data.categoryList.length > 0){
+								var ulCategory = document.getElementById("ulCategory");
+								ulCategory.innerHTML = '';
+								var list = response.data.categoryList;
+								for (var i = 0; i< list.length; i++) {
+									var li = document.createElement('li');
+									li.className = 'mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4';
+									var html = '<a href="#" data-id="'+list[i].id+'">';
+									html +='<span><img src="' + app.getServerUrl() + list[i].imgPath + '"/></span>';
+									html +='<div class="mui-media-body'+(i===0 ? ' category-select' :'')+'" data-id="'+list[i].id+'">' + list[i].name + '</div></a>';
+									
+									li.innerHTML = html;
+									
+									ulCategory.appendChild(li);
+								}
+								// 默认加载第一个
+								loadPro(list[0].id);
+								// 注册事件
+								$(ulCategory).on('tap','a',function(){
+									var $this = this;
+									var cId = $this.getAttribute('data-id');
+									var category = $this.querySelector('.mui-media-body');
+									if(!$this.querySelector('.category-select')){
+										var selector = doc.getElementById('ulCategory').querySelector('.category-select');
+										if(!selector === false){
+											app.removeClass(selector,'category-select');
+										}
+										app.addClass(category,'category-select');
+									}
+									// 加载
+									loadPro(cId);
+								});
+							}							
+						}else {
+							mui.toast('查询错误！');
+						}
+					};
+
+					// 连接服务器，获取分类
+					mui.ajax(serverUrl + "/api/MallBase/GetLeafs", {
+						data: {
+							categoryId:categoryId,
+							searchKey:searchKey
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: initCategory,
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							myPlus.nativeUI.toast('加载商品列表信息错误');
+						}
+					});
+					
+				};
+				// 懒加载
+				$(doc).imageLazyload({
+					placeholder: '../images/60x60.gif'
+				});
+				
+				// 根据 分类加载商品
+				var loadPro = function(categoryId){
+					var initPro = function(response){
+						var ulPro = document.getElementById("ulPro");
+						ulPro.innerHTML = '';
+						
+						if(response.status && response.data && response.data.totalRows > 0){
+							var list = response.data.list;
+
+							for(var i = 0; i <list.length;i++){
+								var li = doc.createElement('li');
+								li.className = 'mui-table-view-cell mui-media';
+								var html ='<a href="#" data-id="'+list[i].id+ '">' ;
+								html +='<img class="mui-media-object mui-pull-left" src="' +app.getServerUrl()+ list[i].imgPath+'">';
+								html +='<div class="mui-media-body">' + list[i].proName;
+								html +='<p class="mui-ellipsis">' + list[i].remark + '</P>';
+								html +='<p class="mui-ellipsis pb"><span class="now">￥' + list[i].discountPrice.toFixed(2) + '</span>';
+								html +='<span>&nbsp;&nbsp;门市价：<i class="pre">￥' + list[i].salePrice.toFixed(2) + '</i></span>';
+								html +='<span>&nbsp;&nbsp;已售&nbsp;' +  list[i].proSaleNum + '</span></p></div></a>';
+								
+								li.innerHTML = html;
+								
+								ulPro.appendChild(li);
+							}
+							
+							// 注册事件
+							$('#ulPro li').on('tap','a',function(){
+								var proId = this.getAttribute('data-id');
+								app.preateHide('pro_detail.html',{proId:proId,intrance:'prolist.html'});
+							});
+						}
+					};
+					// 加载分类商品
+					// 连接服务器，获取分类
+					mui.ajax(serverUrl + "/api/MallProduct/GetProList", {
+						data: {
+							categoryId:categoryId
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: initPro,
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							myPlus.nativeUI.toast('加载商品列表信息错误');
+						}
+					});
+				}				
+			}(mui, document));
+			
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>明细</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		<style>
+			body {
+				background-color: #fff;
+			}
+			
+			.table_list {
+				width: 100%;
+				border: solid 1px #e4e4e4;
+				border-collapse: collapse;
+				line-height: 18px;
+				margin: 15px auto;
+			}
+			
+			.table_list th {
+				background: #f7f7f7;
+				border: solid 1px #e4e4e4;
+				padding: 0 10px;
+				height: 38px;
+				line-height: 38px;
+				font-weight: normal;
+				font-size: 16px;
+			}
+			
+			.table_list th.fd {
+				font-weight: bold;
+			}
+			
+			.table_list th.fcl {
+				padding-right: 0;
+			}
+			
+			.table_list td {
+				height: 60px;
+				line-height: 60px;
+				text-align: center;
+				border: solid 1px #f1f1f1;
+				font-size: 13px;
+				color: #666;
+			}
+			
+			.table_list .fcl img {
+				margin-right: 6px;
+			}
+			
+			.czmx {
+				margin-top: 64px;
+				padding-left: 10px;
+			}
+			
+			.czmx p {
+				margin-bottom: 0;
+				font-size: 14px;
+				color: #666;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">充值消费明细</h1>
+		</header>
+
+		<div class="czmx">
+			<table cellspacing="0" class="table_list fct" rel="table" id="tbdetail">
+				<tr>
+					<th width="20%">时间</th>
+					<th width="20%">金币</th>
+					<th width="20%">收支</th>
+				</tr>
+				<!--<tr>
+					<td>2016-07-01</td>
+					<td>188.88</td>
+					<td>充值</td>
+				</tr>
+				<tr>
+					<td>2016-07-01</td>
+					<td>188.88</td>
+					<td>充值</td>
+
+				</tr>
+				<tr>
+					<td>2016-07-01</td>
+					<td>188.88</td>
+					<td>充值</td>
+				</tr>-->
+			</table>
+			<div class="mui-content-padded mui-text-center" style="height: 100px;">
+			<ul class="mui-pagination mui-pagination-sm" id="dvpager" style="padding-top: 15px;">
+	
+			</ul>
+		</div>
+		</div>
+
+		<!--<nav class="mui-bar mui-bar-tab bottom">
+			<a data-id='index.html' class="mui-tab-item mui-active">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a data-id='cate.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
+				<span class="mui-tab-label">分类</span>
+			</a>
+			<a data-id='culture.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-chatboxes"></span>
+				<span class="mui-tab-label">资讯</span>
+			</a>
+			<a data-id='shopcar.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a data-id='member.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>-->
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/laypage.js" ></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var myPlus,activeTab='recharge_detail.html';
+				$.init({
+					beforeback: function() {
+						app.preateHide('member.html', {});
+					}
+				});
+
+				$.plusReady(function() {
+					myPlus = plus;
+					loadData();
+				});
+				//
+				window.addEventListener('show', function() {
+					loadData();
+				}, false);
+
+				//加载数据
+				var loadData = function(categoryId) {
+					if(!myPlus) {
+						$.plusReady(function() {
+							console.log(2);
+							myPlus = plus;
+							app.MenuInit(acti)
+						});
+						return;
+					}
+					var $state = app.getState();
+					var serverUrl = app.getServerUrl();
+
+					var initData = function(response) {
+						if(response.status == true && response.data) {
+							
+							var table = doc.getElementById('tbdetail');
+							table.innerHTML = '';
+							var tr = doc.createElement('tr');
+							tr.innerHTML = '<th width="20%">时间</th><th width="20%">金币</th><th width="20%">收支</th>';
+							table.appendChild(tr);
+							
+							if(response.data.totalRows > 0){
+								var list = response.data.list;
+								for (var i = 0; i < list.length; i++) {
+									var tr = doc.createElement('tr');
+									var html = '<td>' + list[i].CreateTime.replace('T',' ') + '</td><td>' + list[i].rechargeAmount.toFixed(2) + '</td><td>' 
+									+ (list[i].realAmount > 0 : '充值' : '消费');
+									tr.innerHTML = html;
+									
+									table.appendChild(tr);
+								}
+								// 加载分页
+								laypage({
+								    cont: 'dvpager',
+								    curr:pageIndex,
+								    pages: response.data.totalPages,
+								    groups:1,
+								    first:false,
+								    last:false,
+								    skin: '#21a900',
+								    jump: function(obj,first){
+								    	if(!first){
+								        	loadPages(obj.curr,15,newstype);
+								    	}
+								    }
+								});
+							}
+							
+						} else {
+							mui.toast('查询充值明细错误！');
+						}
+					};
+					// 连接服务器，获取分类
+					mui.ajax(serverUrl + "/api/MRecharge/GetRechargePages", {
+						data: {
+							memberId:$state.accountid,
+							pageIndex:pageIndex,
+							pageSize:20
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: initData,
+						headers: {
+							"Authorization": "Bearer " + $state.token
+						},
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							app.onError(errorThrown);
+//							myPlus.nativeUI.toast('查询充值明细失败');
+						}
+					});
+
+				};
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

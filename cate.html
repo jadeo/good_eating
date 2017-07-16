@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>商品分类</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		<style>
+			.mui-tab-item {
+				width: 20%;
+			}
+			
+			.mui-slider {
+				margin-top: 44px;
+			}
+			
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+				font-size: 12px;
+			}
+			
+			.mui-ellipsis {
+				font-size: 12px;
+			}
+			
+			.mui-media-body {
+				font-size: 14px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				max-width: 70px;
+				height: 70px;
+			}
+			
+			.mui-table-view {
+				padding-bottom: 60px;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				border-right: none;
+				border-bottom: none;
+			}
+			
+			.mui-table-view-cell img {
+				width: 65px;
+				height: 65px;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				padding: 0;
+			}
+			
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,
+			.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<!-- 主页面标题 -->
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title" id="title">商品分类</h1>
+		</header>
+		<div class="mui-content mui-row mui-fullscreen">
+			<div class="mui-col-xs-3">
+				<div id="segmentedControls" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-vertical">
+				</div>
+			</div>
+			<div id="segmentedControlContents" class="mui-col-xs-9" style="border-left: 1px solid #c8c7cc;">
+	
+			</div>
+		</div>
+		<nav class="mui-bar mui-bar-tab bottom">
+			<a data-id='index.html' class="mui-tab-item mui-active">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a data-id='prolist.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
+				<span class="mui-tab-label">分类</span>
+			</a>
+			<a data-id='culture.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-chatboxes"></span>
+				<span class="mui-tab-label">资讯</span>
+			</a>
+			<a data-id='shopcar.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a data-id='member.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var myPlus, activeTab = 'cate.html';
+				$.init({
+					beforeback: function() {
+						var self = plus.webview.currentWebview();
+						var intrance = self.extras.intrance || 'index.html';
+						app.preateHide(intrance,self.extras);		
+						return true;
+					}
+				});
+
+				$.plusReady(function() {
+					myPlus = plus;
+					app.MenuInit(activeTab);
+					loadData();
+				});
+				//
+				window.addEventListener('show', function() {
+					loadData();
+				}, false);
+
+				//加载数据
+				var loadData = function(categoryId) {
+					if(!myPlus) {
+						$.plusReady(function() {
+							myPlus = plus;
+							app.MenuInit(activeTab);
+							loadData();
+						});
+						return;
+					}
+					var $state = app.getState();
+					var serverUrl = app.getServerUrl();
+
+					var initCategory = function(response) {
+						// 加载分类
+						if(response.data && response.data.length > 0) {
+							var controls = document.getElementById("segmentedControls");
+							var contents = document.getElementById("segmentedControlContents");
+							var html = [], chtml = [];
+							var datas = response.data;
+							for (var i =0; i < datas.length; i++) {
+								html.push('<a class="mui-control-item" href="#content' + i + '">' + datas[i].parent.name + '</a>');
+								chtml.push('<div id="content' + i + '" class="mui-content mui-control-content"><ul class="mui-table-view mui-grid-view mui-grid-9">');
+								for (var j = 0; j < datas[i].childs.length;j++) {
+									var childs = datas[i].childs[j];
+									chtml.push('<li style="background:#fff;" class="mui-table-view-cell ui-media mui-col-xs-4 mui-col-sm-3"><a href="#" data-id="'+childs.id+'">');
+									chtml.push('<span class=""><img src="'+serverUrl + childs.imgPath+'" /></span><div class="mui-media-body">' + childs.name + '</div></a></li>');
+								}
+								chtml.push('</ul></div>');
+							}
+							controls.innerHTML = html.join('');
+							contents.innerHTML = chtml.join('');
+							 //默认选中第一个
+							controls.querySelector('.mui-control-item').classList.add('mui-active');
+							contents.querySelector('.mui-control-content').classList.add('mui-active');
+							// 注册事件
+							$('.mui-control-content').on('tap', 'a', function() {
+								var categoryId = this.getAttribute('data-id');
+								debugger;
+								var data = {categoryId:categoryId,intrance:'cate.html',searchKey:''};
+								app.preateHide('prolist.html',data);
+							});
+						} else {
+							mui.toast('查询错误！');
+						}
+					};
+					// 连接服务器，获取分类
+					mui.ajax(serverUrl + "/api/MallBase/GetAllCategory", {
+						data: {
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: initCategory,
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							myPlus.nativeUI.toast('加载分类列表失败');
+						}
+					});
+				};
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

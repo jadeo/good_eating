@@ -1,0 +1,386 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		<style>
+			.mui-tab-item {
+				width: 20%;
+			}
+			
+			.mui-slider {
+				margin-top: 44px;
+			}
+			
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+				font-size: 12px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				max-width: 70px;
+				height: 70px;
+			}
+			
+			.mui-table-view {
+				padding-bottom: 60px;
+			}
+			
+			.tui {
+				line-height: 40px;
+				margin-bottom: 0px;
+				padding-left: 10px;
+				font-size: 16px;
+				color: #666;
+				border-bottom: 1px solid #ccc;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				border-right: none;
+				border-bottom: none;
+			}
+			
+			.mui-table-view-cell img {
+				width: 65px;
+				height: 65px;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+				padding: 0;
+			}
+			
+			header {
+				width: 100%;
+			}
+			
+			.logo {
+				width: 30%;
+				display: inline-block;
+				height: 44px;
+				float: left;
+			}
+			
+			.logo img {
+				margin-top: 5px;
+				height: 30px;
+			}
+			
+			.form {
+				margin-left: 20px;
+				width: 52%;
+				float: left;
+			}
+			
+			.form input {
+				height: 30px;
+				border-radius: 15px;
+				font-size: 12px;
+				margin-top: 7px;
+			}
+			
+			.search {
+				width: 10%;
+				float: right;
+			}
+			
+			.search img {
+				width: 20px;
+				float: right;
+				margin-top: 10px;
+			}
+			
+			body {
+				background-color: #fff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- 主页面标题 -->
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-pull-left logo"><img src="images/logo.png" alt="" /></a>
+			<div class="form">
+				<form action="">
+					<input type="text" placeholder="请输入要搜索的关键字" id="searchKey"/>
+				</form>
+			</div>
+			<div class="search">
+				<a href="#" id="searchBtn"><img src="images/search.gif" alt="" /></a>
+			</div>
+		</header>
+
+		<div id="slider" class="mui-slider">
+			<div class="mui-slider-group mui-slider-loop" id="dvloop">
+				<!--
+   
+                	时间：2017-04-21
+                	描述：广告
+                -->
+			</div>
+			<div class="mui-slider-indicator" id="dvindicator">
+				<!--
+   
+                	时间：2017-04-21
+                	描述：轮播
+                -->
+			</div>
+		</div>
+
+		<ul class="mui-table-view mui-grid-view mui-grid-9" id="dvCategory" style="background-color: #fff;">
+			<!--
+            	时间：2017-04-21
+            	描述：分类
+            -->
+		</ul>
+
+		<div class='cb activity' id="dvActivity">
+			<!--
+            	时间：2017-04-21
+            	描述：推荐活动
+            -->
+		</div>
+
+		<ul class="mui-table-view" id="ulPro">
+			<!--
+            	时间：2017-04-21
+            	描述：推荐产品
+           -->
+		</ul>
+
+		<nav class="mui-bar mui-bar-tab bottom">
+			<a data-id='index.html' class="mui-tab-item mui-active">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a data-id='cate.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
+				<span class="mui-tab-label">分类</span>
+			</a>
+			<a data-id='culture.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-chatboxes"></span>
+				<span class="mui-tab-label">资讯</span>
+			</a>
+			<a data-id='shopcar.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a data-id='member.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/app.js" ></script>
+		<script type="text/javascript" src="js/mui.lazyload.js" ></script>
+		<script type="text/javascript" src="js/mui.lazyload.img.js" ></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var myPlus,activeTab='index.html';
+				$.init();
+
+				$.plusReady(function() {
+					myPlus = plus;
+					app.MenuInit(activeTab);
+					initPlus();
+					loadData();
+				});
+				//
+				window.addEventListener('show', function() {
+					loadData();
+				}, false);
+
+				//加载数据
+				var loadData = function(){
+					if(!myPlus){
+						$.plusReady(function(){
+							myPlus = plus;
+							initPlus();
+							app.MenuInit(activeTab);
+							loadData();
+						});
+						return;
+					}
+					var $state = app.getState();
+					var serverUrl = app.getServerUrl();
+					
+					var initData = function(response){
+						if(response.status == true && response.data) {
+							// 加载滚动图
+							if(response.data.adList && response.data.adList.length > 0){
+								var dvloop = doc.getElementById("dvloop");
+								var dvindicator = doc.getElementById("dvindicator");
+								dvloop.innerHTML = '';
+								dvindicator.innerHTML = '';
+								
+								var adList = response.data.adList;
+								if(adList.length > 0){
+									var dv = doc.createElement('div');
+									dv.className='mui-slider-item mui-slider-item-duplicate';
+									dv.innerHTML='<a href="#"><img src="' +serverUrl+adList[0].imgPath+'"></a>';
+									dvloop.appendChild(dv);
+									
+									for (var i = 0; i< adList.length;i++) {
+										var dv1 = doc.createElement('div');
+										dv1.className='mui-slider-item';
+										dv1.innerHTML='<a href="#"><img src="'+serverUrl+adList[i].imgPath+'"></a>';
+										dvloop.appendChild(dv1);
+										
+										var dv2 = doc.createElement('div');
+										dv2.className='mui-indicator' + (i === 0 ? ' mui-active' : '');
+										dvindicator.appendChild(dv2);
+									}
+	
+									dv = doc.createElement('div');
+									dv.className='mui-slider-item mui-slider-item-duplicate';
+									dv.innerHTML='<a href="#"><img src="' +serverUrl+adList[0].imgPath+'"></a>';
+									dvloop.appendChild(dv);
+									
+									// 加载滚动图
+									var gallery = mui('.mui-slider');
+									gallery.slider({
+										interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
+									});
+								}
+								
+							}
+							// 加载分类
+							if(response.data.categoryList && response.data.categoryList.length > 0){
+								var dvCategory = doc.getElementById("dvCategory");
+								dvCategory.innerHTML = '';
+								var cateList = response.data.categoryList;
+								for(var i =0;i < cateList.length; i++){
+									var li = doc.createElement('li');
+									li.className = 'mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3';
+									var html ='<a href="#" data-id="'+cateList[i].id+'">';
+									html += '<span><img src="' + serverUrl+cateList[i].imgPath +'"/></span>';
+									html += '<div class="mui-media-body">'+cateList[i].name+'</div></a>';	
+									
+									li.innerHTML = html;
+									dvCategory.appendChild(li);
+								}
+								//绑定事件
+								$('.mui-col-xs-3').on('tap', 'a', function() {
+									var categoryId= this.getAttribute('data-id');
+									app.preateHide('prolist.html',{intrance:'index.html',categoryId:categoryId,searchKey:''});
+								});
+							}
+							// 加载活动
+							if(response.data.activityList && response.data.activityList.length > 0){
+								var activityList = response.data.activityList;
+								var dvActivity = doc.getElementById("dvActivity");
+								dvActivity.innerHTML = '';
+								var html1 = '',html2 ='',html3='',html4='';
+								for(var i = 0; i < activityList.length; i++){
+									if(activityList[i].position === 1){
+										html1 = '<div class="cb_left"><a href="#" data-id="'+activityList[i].id+'"><img src="' + serverUrl+activityList[i].imgPath +'"></a></div>';
+									}else if(activityList[i].position === 2){
+										html2 = '<div class="cbr_top"><a href="#" data-id="'+activityList[i].id+'"><img src="'+serverUrl+activityList[i].imgPath+'"></a></div>';
+									}else if(activityList[i].position === 3){
+										html3 = '<a href="#" data-id="'+activityList[i].id+'"><img src="'+serverUrl+activityList[i].imgPath+'" class="m1"></a>';
+									}else if(activityList[i].position === 4){
+										html4 = '<a href="#" data-id="'+activityList[i].id+'"><img src="'+serverUrl+activityList[i].imgPath+'" class="m2"></a>';
+									}
+								}
+								dvActivity.innerHTML = html1 + '<div class="cb_right">'+ html2 
+								+ '<div class="cbr_bottom" style="background:#fff;">' + html3 + html4+'</div></div>';
+								// 取消事件
+								$('#dvActivity').off('tap','a');
+								//绑定事件
+								$('#dvActivity').on('tap', 'a', function() {
+									var url = 'pro_detail.html';
+									var id = this.getAttribute('data-id');
+									
+									app.preateHide(url,{proId:id,intrance:'index.html'});
+								});
+							}
+							// 加载推荐商品
+							if(response.data.productList && response.data.productList.length > 0){
+								var ulPro = doc.getElementById("ulPro");
+								ulPro.innerHTML = '<p class="tui">推荐产品</p>';
+								var proList = response.data.productList;
+								for(var i = 0; i< proList.length;i++){
+									var li = doc.createElement('li');
+									li.className = 'mui-table-view-cell mui-media';
+									
+									var html ='<a href="#" data-id="'+proList[i].id+'">';
+									html += '<img class="mui-media-object mui-pull-left" src="' + serverUrl+proList[i].imgPath +'"/>';
+									html += '<div class="mui-media-body">'+proList[i].proName+'</div>';	
+									html +='<p class="mui-ellipsis">' + proList[i].remark + '</p>';
+									html +='<p class="mui-ellipsis pb"><span class="now">￥' +proList[i].discountPrice+'</span>'
+									html +='<span>&nbsp;&nbsp;门市价：<i class="pre">￥' + proList[i].salePrice+'</i></span>';
+									html +='<span class="ys">已售' + proList[i].proSaleNum+'</span></p></div></a></li>';
+									
+									li.innerHTML = html;
+									ulPro.appendChild(li);
+								}
+								//绑定事件
+								$('#ulPro').off('tap','a');
+								$('#ulPro').on('tap', 'a', function() {
+									var url = 'pro_detail.html';
+									var id = this.getAttribute('data-id');									
+									app.preateHide(url,{proId:id,intrance:'index.html'});
+								});
+							}
+						}else {
+							mui.toast('查询错误！');
+						}
+					};
+					// 连接服务器
+					$.ajax(serverUrl + "/api/MallBase/GetHomeData", {
+						data: {
+							userId: !$state.accountid ? 0 :$state.accountid
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: initData,
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							console.log(serverUrl);
+							myPlus.nativeUI.toast('加载首页数据异常');
+						}
+					});
+				};
+				// 懒加载
+				$(doc).imageLazyload({
+					placeholder: '../images/60x60.gif'
+				});
+				
+				var initPlus = function(){
+					//--
+					$.oldBack = mui.back;
+					var backButtonPress = 0;
+					$.back = function(event) {
+						backButtonPress++;
+						if (backButtonPress > 1) {
+							plus.runtime.quit();
+						} else {
+							plus.nativeUI.toast('再按一次退出应用');
+						}
+						setTimeout(function() {
+							backButtonPress = 0;
+						}, 1000);
+						return false;
+					};
+				};
+				
+				// 注册搜索事件
+				doc.getElementById('searchBtn').addEventListener('tap',function(){
+					var searchKey = doc.getElementById('searchKey').value;
+					if(searchKey === ''){
+						return;
+					}
+
+					app.preateHide('prolist.html',{categoryId:0,searchKey:searchKey});
+				});
+			}(mui, document));
+			
+		</script>
+	</body>
+
+</html>

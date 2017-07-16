@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/login.css" />
+		<style>
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			.mui-input-group label {
+				width: 22%;
+			}
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 78%;
+			}
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			.mui-btn {
+				padding: 10px;
+			}
+			body{
+				background-color: #fff;
+			}
+			.mui-content{
+				background-color: #fff;
+			}
+			.mui-bar{
+				background-color: #fff;
+			}
+			.mui-bar-nav{
+				-webkit-box-shadow:none;
+				box-shadow:none;
+			}
+			.mui-input-group:before{
+				height:0;
+			}
+			.zc a{
+				color:#21a900;
+			}
+			.mui-input-row .mui-input-clear~.mui-icon-clear, .mui-input-row .mui-input-password~.mui-icon-eye, .mui-input-row .mui-input-speech~.mui-icon-speech {
+				
+				top: 19px;
+				}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a href="javascript:history.back()"><i class="iconfont left-icon" style="color: #21a900;"><</i></a>	
+			<div class="top-login-btns">
+           	 	<div class="u-login zc"><a href="javascript:void(0);" data-id="login.html">登录</a></div><span></span>
+            	<div class="u-reg cur"><a href="javascript:void(0);" data-id="regist.html">注册</a></div>
+       		</div>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label><span class="mui-icon mui-icon-person"></span></label>
+					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入手机号">
+				</div>
+				<div class="mui-input-row mui-password">
+					<label><span class="mui-icon mui-icon-locked"></span></label>
+					<input type="password" class="mui-input-password" placeholder="请输入密码" id="password">
+						
+				</div>
+				
+				<div class="mui-input-row">
+					<label><span class="mui-icon mui-icon-locked"></span></label>
+					<input id='password_confirm' type="password" class="mui-input-password" id="password_confirm" placeholder="请确认密码">
+				</div>
+				
+				
+			</form>
+			<div class="mui-content-padded">
+				<button id='reg' class="mui-btn mui-btn-block mui-btn-primary">马上注册</button>
+			</div>
+			
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
+		<script type="text/javascript" src="js/md5.js" ></script>
+		<script>
+			(function($, doc) {
+				var activeTab = 'regist.html';
+				$.init({
+					beforeback:function(){
+						
+						app.preateHide('login.html',{});
+						return true;
+					}
+				});
+				
+				// 注册导航点击事件
+				var MenuInit = function(activeTab) {
+					//选项卡点击事件
+					$('.top-login-btns').on('tap', 'a', function(e) {
+						var dataId = this.getAttribute('data-id');
+						if(activeTab === dataId) {
+							return;
+						}
+			
+						app.preateHide(dataId,{});
+						plus.webview.hide(activeTab);
+					});
+				}
+				
+				$.plusReady(function() {
+					MenuInit();
+					
+					var settings = app.getSettings();
+					var regButton = doc.getElementById('reg');
+					var accountBox = doc.getElementById('account');
+					var passwordBox = doc.getElementById('password');
+					var passwordConfirmBox = doc.getElementById('password_confirm');
+					regButton.addEventListener('tap', function(event) {
+						if(!/^1[3|4|5|7|8][0-9]{9}$/.test(accountBox.value)){
+							plus.nativeUI.toast('请输入正确的手机号');
+							return;
+						}
+						if(!/^[a-zA-z]\w{6,15}$/.test(passwordBox.value)){
+							plus.nativeUI.toast('请输入6-16位，以字母开头，有字母、数字、下划线组成的密码');
+							return;
+						}
+						var passwordConfirm = passwordConfirmBox.value;
+						if (passwordConfirm != passwordBox.value) {
+							plus.nativeUI.toast('密码两次输入不一致');
+							return;
+						}
+						var regInfo = {
+							account: accountBox.value,
+							password: md5(passwordBox.value)
+						};
+						app.reg(regInfo, function(err) {
+							debugger;
+							if (err) {
+								plus.nativeUI.toast(err);
+								return;
+							}
+							plus.nativeUI.toast('注册成功');
+							/*
+							 * 注意：
+							 * 1、因本示例应用启动页就是登录页面，因此注册成功后，直接显示登录页即可；
+							 * 2、如果真实案例中，启动页不是登录页，则需修改，使用mui.openWindow打开真实的登录页面
+							 */
+							app.preateHide('login.html',{});
+						});
+					});
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

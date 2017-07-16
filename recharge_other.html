@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>给他人充值</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<style>
+			body{
+				background-color: #fff;
+			}
+			.cz{
+				margin-top: 44px;
+				width:100%;
+				
+			}
+			.cz img{
+				width:100%;
+			}
+			.select img{
+				width:15px;
+				margin-right: 20px;
+			}
+			.czjine{
+				height:50px;
+				line-height:50px;
+				font-size:20px;
+				color:#000;
+				
+				border-bottom: 1px solid #F7F7F7;
+				/*margin-bottom: 0px;*/
+			}
+			.select li{
+				line-height: 30px;
+				font-size:18px;
+			}
+			.mui-btn{
+				height:40px;
+			}
+			.xize{
+				margin-top: 25px;
+				padding-left:10px;
+				padding-bottom:40px;
+			}
+			.xize dt{
+				color:#21a900;
+				font-size:15px;
+				margin-bottom: 10px;
+				font-weight: 900;
+			}
+			.xize dd{
+				font-size:11px;
+				font-weight:900;
+				-webkit-margin-start: 0px;
+				color:#666666;
+				
+			}
+			.beizhu{
+				margin-top: 20px;;
+			}
+			.cz form{
+				width:100%;
+				padding-top: 20px;
+			}
+			.cz label{
+				width:25%;
+				float:left;
+				font-size:16px;
+				padding-left:10px;
+				margin-top:10px;
+				
+			}
+			.cz input{
+				width:70%;
+				
+			}
+			mui-checkbox input[type=checkbox]:checked:before, 
+			.mui-radio input[type=radio]:checked:before {
+				color: #21a900;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">给他人充值</h1>
+		</header>
+		<div class="cz">
+			<form action="">
+				<label for="">对方手机：</label>
+				<input type="text" id="mobile" class="mui-input-clear" placeholder="输入对方手机"/>
+			</form>
+			<p style="padding-left: 10px;" class='czjine'>充值金额：</p>
+			<div class="select">
+				<ul style="padding-left:10px;margin-top:0" id="ulAmount">
+				</ul>
+			</div>
+			<button type="button" id="btnSubmit" class="mui-btn mui-btn-success mui-btn-block">提交</button>
+			<div class="xize">
+				<dl id="dlRule">
+					<dt>充值细则：</dt>
+					<dd>一、充值100元送金币150枚；</dd>
+					<dd>二、充值200元送金币300枚；</dd>
+					<dd>三、充值500元送金币750枚；</dd>
+					<dd>四、充值1000元送金币;</dd>					
+					<dd>备注：活动最终解释权归吃的好官方运营平台所有</dd>					
+				</dl>
+				
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/app.js" ></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var myPlus;
+				$.init({
+					beforeback:function(){
+						app.preateHide('member.html',{});
+						return true;
+					}
+				});
+
+				$.plusReady(function() {
+					myPlus = plus;
+					loadData();
+				});
+				//
+				window.addEventListener('show', function() {
+					loadData();
+				}, false);
+				
+				//加载数据
+				var loadData = function(categoryId){
+					if(!myPlus){
+						$.plusReady(function(){
+							console.log(2);
+							myPlus = plus;
+						});
+						return;
+					}
+					var $state = app.getState();
+					var serverUrl = app.getServerUrl();
+					
+					var initRules = function(response){
+						if(response.status == true && response.data) {
+							var ulAmount = doc.getElementById("ulAmount");
+							var dlRule = doc.getElementById("dlRule");
+							var rulehtml = '<dt>充值细则：</dt>';
+							var amounthtml = '';
+							for (var i = 0; i< response.data.length; i++) {								
+								amounthtml += '<li class="mui-table-view-cell mui-radio mui-left"><input name="recharge" type="radio" data-id="'+response.data[i].id
+								+'">' + response.data[i].rechargeAmount +' 元</li>';
+								
+								rulehtml +='<dd>' +(i+1) +'、充值'+ response.data[i].rechargeAmount +'元，送金币' + response.data[i].returnAmount+'枚；</dd>';
+							}
+							
+							rulehtml += '<dd class="beizhu">备注：活动最终解释权归吃的好官方运营平台所有</dd>';
+							
+							dlRule.innerHTML = rulehtml;
+							ulAmount.innerHTML = amounthtml;
+							
+							doc.querySelector('input[type="radio"]').setAttribute('checked','checked');
+						}else {
+							mui.toast('查询错误！');
+						}
+					};
+					// 连接服务器，获取分类
+					mui.ajax(serverUrl + "/api/MRecharge/GetRechargeRules", {
+						data: {
+							
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						success: initRules,
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+//							myPlus.nativeUI.toast('查询充值规则失败');
+						}
+					});
+					
+				};
+				
+				// 注册提交事件
+				doc.getElementById("btnSubmit").addEventListener('tap',function(){
+					var mobile = doc.getElementById("mobile").value;
+					if(!/^1[3|4|5|7|8][0-9]{9}$/.test(mobile)){
+						plus.nativeUI.toast('请输入正确的手机号');
+						return;
+					}
+					
+					var recharge = getValue('input[type="radio"]');
+					if(recharge=== null){
+						plus.nativeUI.toast('请选择充值金额');
+						return;
+					}
+					console.log('mobile:' + mobile +' 充值金额：' + recharge.amount);
+					
+					plus.nativeUI.toast('开发中...');
+				});
+				
+				// 获取radio的值
+				function getValue(obj){
+				    var radio = doc.querySelectorAll(obj);
+				    for (i=0; i<radio.length; i++) {  
+				        if (radio[i].checked) {  
+				            return {amount:radio[i].value,rechargeId:radio[i].getAttribute('data-id')};  
+				        }  
+				    }
+				    
+				    return null;
+				} 
+				
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

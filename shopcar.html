@@ -1,0 +1,423 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/icons-extra.css" />
+		
+		<style>
+			.mui-control-content{
+				margin-top: 40px;
+			}
+			.dbottom{
+				font-size:14px;				
+			}
+			.dbottom .delete{
+				margin-right: 10px;
+				color:#8F8F94;
+			}
+			.dbottom .change{
+				text-decoration: underline;
+				color:#21a900;
+			}
+			.mui-icon-closeempty{
+				color:red;
+				font-weight: bold;
+				margin-top: 8px;
+			}
+			.js{
+				background-color: #21a900;
+				color:#fff;
+			}
+			.cnum{
+				font-style:normal;
+			}
+			.js{
+				padding:8px 20px;
+				font-size:16px;
+			}
+			.text-active{
+				font-style: normal;
+				color:red;
+			}
+			.mui-icon-checkmarkempty{
+				float:left;
+				width:15px;
+				height:15px;
+				line-height: 16px;				
+				background-color: #21a900;
+				color:#fff;
+				font-size:16px;
+				margin-right:6px;
+			}
+			.mui-icon-nocheck{
+				float:left;
+				width:15px;
+				height:15px;
+				line-height: 15px;				
+				background-color: #21a900;
+				color:#fff;
+				font-size:20px;
+				margin-right:6px;
+			}
+			.all{
+				margin-top: 13px;
+			}
+			body{
+				background-color: #fff;
+			}
+			.mui-numbox{
+				padding:0;
+				width:80px;
+				height:30px;
+			}
+			.mui-numbox .mui-numbox-input{
+				width:100px;
+			}
+			.mui-numbox-btn-minus{
+				width:23px;
+			}
+			.mui-numbox .mui-btn{
+				width:23px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">购物车</h1>
+		</header>
+		
+		<div class="mui-control-content mui-active">
+			<ul class="mui-table-view">
+
+				<li class="mui-table-view-cell">
+					<div class="dtop">
+						<span class='mui-icon mui-icon-checkmarkempty all'></span>
+						<span class='mui-pull-left'>全部商品</span>
+					</div>
+					<div class="dmain">
+						<ul class="mui-table-view ml" id="ulPro">
+						    <!--<li class="mui-table-view-cell mui-media myli">
+						    	<span class='mui-icon mui-icon-checkmarkempty mycheckbox'></span>
+						        <a href="javascript:;">
+						            <img class="mui-media-object mui-pull-left mypro" src="images/food1.gif">
+						            <div class="mui-media-body">										              
+						                <p class="mui-ellipsis mypro">秘制香辣煲（信息学院路店）</p>
+						                <div class="mui-numbox" data-numbox-min="1">
+											<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+											<input class="mui-input-numbox" type="number" />
+											<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+										</div>
+						            </div>
+							        <div class="mui-pull-right">
+							        	<p class='text-active'>￥188</p>
+							        	<p class='mui-text-right'><span class="mui-icon mui-icon-trash"></span></p>
+							        </div>
+						        </a>
+						    </li>-->
+						    
+						</ul>
+					</div>
+					<div class="dbottom">
+						<span class='mui-pull-left mui-icon mui-icon-closeempty'></span>
+						<span class='delete'>删除选中物品</span>
+					</div>
+					
+					<div class="dpay">
+						<span class="mui-pull-left">总计：<i class='text-active' id='totalAmount'>￥0</i></span>
+						<a href="javascript:void(0);"><button type="button" class="mui-btn js mui-pull-right" id="btnSettlement">结算</button></a>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		<nav class="mui-bar mui-bar-tab bottom">
+			<a data-id='index.html' class="mui-tab-item mui-active">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a data-id='cate.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-class"></span>
+				<span class="mui-tab-label">分类</span>
+			</a>
+			<a data-id='culture.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-chatboxes"></span>
+				<span class="mui-tab-label">资讯</span>
+			</a>
+			<a data-id='shopcar.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
+				<span class="mui-tab-label">购物车</span>
+			</a>
+			<a data-id='member.html' class="mui-tab-item">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/app.js" ></script>
+		<script type="text/javascript">
+			(function($, doc) {
+				var myPlus,
+				activeTab = 'shopcar.html',
+				serverUrl = app.getServerUrl();
+				$.init({
+					beforeback:function(){
+						var self = plus.webview.currentWebview();
+						var intrance = self.extras.intrance||'index.html';
+						
+						app.preateHide(intrance,self.extras);
+						
+						return true;
+					}
+				});
+				//
+				
+				$.plusReady(function() {
+					myPlus = plus;
+					app.MenuInit(activeTab);
+					loadData();
+				});
+				
+				window.addEventListener('show', function() {
+					loadData();
+				}, false);
+				
+				//加载数据
+				var loadData = function() {
+					if(!myPlus) {
+						$.plusReady(function() {
+							myPlus = plus;
+							app.MenuInit(activeTab);							
+							loadData();
+						});
+						
+						return;
+					}
+					
+					var $state = app.getState();
+					//如果未登录
+					if(!$state){
+						app.preateHide('login.html',{intrance:'shopcar.html'});
+					}
+					var initData = function(response) {
+						if(response.status == true && response.data) {
+							// 信息
+							var ulPro = document.getElementById("ulPro");
+							ulPro.innerHTML = '';
+
+							var list = response.data;
+							var totalAmount = 0;
+							for(var i =0;i < list.length;i++){
+								var li = doc.createElement('li');
+								li.className='mui-table-view-cell mui-media myli';
+								var html = '<span class="mui-icon mui-icon-checkmarkempty mycheckbox" data-id="'+list[i].id+'" data-price="'+list[i].salePrice.toFixed(2)+'" data-num="pnum'+i+'"></span>';
+								html +='<a href="javascript:void(0);" data-id="'+list[i].productId+'" data-specid="'+list[i].proSpecDetailId+'">';
+								html +='<img class="mui-media-object mui-pull-left" src="' + serverUrl+ list[i].imgPath +'">';
+								html +='<div class="mui-media-body"><p class="mui-ellipsis">' + list[i].proName+'</p>';
+								html += '<div class="mui-numbox" data-numbox-min="1">';
+								html += '<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>';
+								html += '<input class="mui-input-numbox" type="number" value="'+list[i].purchaseQuantity+'" id="pnum'+i+'"/>';
+								html += '<button class="mui-btn mui-btn-numbox-plus" type="button">+</button></div></div>';
+								html +='<div class="mui-pull-right"><p class="text-active">￥' +list[i].salePrice.toFixed(2) + '</p>';
+								html +='<p class="mui-text-right"><span class="mui-icon mui-icon-trash" data-id="'+list[i].id+'"></span></p></div></a>';
+								li.innerHTML = html;						
+								
+								ulPro.appendChild(li);
+								
+								totalAmount += list[i].purchaseQuantity * list[i].salePrice;
+							}
+							// 初始化数量选择控件
+							$('.mui-numbox').numbox();
+							// 总金额
+							doc.getElementById('totalAmount').innerHTML = '￥' + totalAmount.toFixed(2);
+							// 注销
+							$('.myli').off('tap','a');
+							// 注册跳转商品明细事件
+							$('.myli').on('tap','.mypro',function(){
+								var proId = this.getAttribute('data-id');
+								var specDetailId = this.getAttribute('data-specid');
+								app.preateHide('pro_detail.html',{intrance:'shopcar.html',proId:proId,detailId:specDetailId});
+							});
+							
+							// 注册选中商品事件
+							$('.myli').on('tap','.mycheckbox',function(){
+								var all = doc.querySelector('.all');
+								var isAll = app.hasClass(this,'mui-icon-checkmarkempty');
+								if(isAll){
+									// 取消全选按钮
+									app.removeClass(all,'mui-icon-checkmarkempty');
+									app.addClass(all,'mui-icon-nocheck');
+									
+									// 取消选中按钮
+									app.removeClass(this,'mui-icon-checkmarkempty');
+									app.addClass(this,'mui-icon-nocheck');
+								}else{
+									// 选中按钮
+									app.removeClass(this,'mui-icon-nocheck');
+									app.addClass(this,'mui-icon-checkmarkempty');
+									
+									var isTrue = true;
+									// 判断是否所有的商品都选中
+									$('.mycheckbox').each(function(index,item){
+										if(app.hasClass(item,'nocheck')){
+											isTrue = false;
+											return;
+										}
+									});
+									
+									if(isTrue === true){
+										// 取消全选按钮
+										app.removeClass(all,'mui-icon-nocheck');
+										app.addClass(all,'mui-icon-checkmarkempty');
+									}
+								}
+								// 计算总金额
+								setTotal();
+							});
+							
+							// 注册删除购物车事件
+							$('.myli').on('tap','.mui-icon-trash',function(){
+								var shopcarIds=[];
+								shopcarIds.push(this.getAttribute('data-id'));
+								deleteShopCar(shopcarIds);
+							});
+							
+							// 注册数量改变事件
+							
+							$('.myli').on('change','.mui-input-numbox',function(){
+								setTotal();
+							});
+						} else {
+							mui.toast('查询错误！');
+						}
+					};
+					// 连接服务器
+					mui.ajax(serverUrl + "/api/ShopCar/GetShopCarList", {
+						data: {
+							memberId:$state.accountid,
+						},
+						dataType: 'json', //服务器返回json格式数据
+						type: 'get', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						headers: {
+							"Authorization": "Bearer " + $state.token
+						},
+						success: initData,
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							app.onError(errorThrown);
+//							myPlus.nativeUI.toast('获取购物车信息失败');
+						}
+					});
+				};
+				
+				// 总金额
+				var setTotal =function(){
+					var total = 0;
+
+					$('.mycheckbox.mui-icon-checkmarkempty').each(function(index,item){
+						var price = parseFloat(item.getAttribute('data-price'));
+						var num = parseInt(doc.getElementById(item.getAttribute('data-num')).value);
+						total += price * num;
+					});
+					
+					doc.getElementById('totalAmount').innerHTML = '￥' + total.toFixed(2);
+				};
+				
+				// 注册全选
+				$('.dtop').off('tap','span');
+				$('.dtop').on('tap','span',function(){
+					var spans = $('.mycheckbox');
+					if(spans.length === 0) return;
+					var isAll = app.hasClass(doc.querySelector('.all'),'mui-icon-checkmarkempty');
+					var span = doc.querySelector('all');
+					if(isAll){
+						$('.mui-icon-checkmarkempty').each(function(index,item){
+							app.removeClass(item,'mui-icon-checkmarkempty');
+							app.addClass(item,'mui-icon-nocheck');
+						});
+					}else{
+						$('.mui-icon-nocheck').each(function(index,item){
+							app.removeClass(item,'mui-icon-nocheck');
+							app.addClass(item,'mui-icon-checkmarkempty');
+						});
+					}
+				});
+				
+				// 注册删批量除购物车事件
+				$('.dbottom').off('tap','span');
+				$('.dbottom').on('tap','span',function(){
+					var shopcarIds=[];
+					var spans = doc.getElementById('ulPro').querySelectorAll('.mui-icon-checkmarkempty');
+					$.each(spans,function(index,item){
+						shopcarIds.push(this.getAttribute('data-id'));
+					});
+					if(shopcarIds.length === 0){
+						myPlus.nativeUI.toast('请选择要删除的商品');
+						return;
+					}
+					deleteShopCar(shopcarIds);
+				});
+				
+				// 删除购物车
+				var deleteShopCar = function(shopcarIds){
+					var $state = app.getState();
+					// 连接服务器
+					mui.ajax(serverUrl + "/api/ShopCar/DeleteShopCar", {
+						data: JSON.stringify({
+							memberId:$state.accountid,
+							shopcarIds:shopcarIds.join()
+						}),
+						contentType: 'application/json',
+						dataType: 'json', //服务器返回json格式数据
+						type: 'post', //HTTP请求类型
+						timeout: 10000, //超时时间设置为10秒；
+						headers: {
+							"Authorization": "Bearer " + $state.token
+						},
+						success: function(response){
+							if(response.status === true){
+								myPlus.nativeUI.toast('删除成功');
+								// 刷新
+								loadData();
+							}else{
+								myPlus.nativeUI.toast('删除失败');
+							}
+						},
+						error: function(xhr, type, errorThrown) {
+							console.log(errorThrown);
+							app.onError(errorThrown);
+						}
+					});
+				};
+			
+				// 结算
+				doc.getElementById('btnSettlement').addEventListener('tap',function(){
+					//获取选中商品
+					var shopCarList=[];
+					$('.mycheckbox').each(function(index,item){
+						if(app.hasClass(item,'mui-icon-checkmarkempty')){
+							var id = item.getAttribute('data-id');
+							var num = doc.getElementById(item.getAttribute('data-num')).value;
+							shopCarList.push({id:id,PurchaseQuantity:num});
+						}
+					});
+					
+					if(shopCarList.length === 0){
+						myPlus.nativeUI.toast('请选择商品');
+						return;
+					}
+					//跳转到结算页面
+					app.preateHide('settlement.html',{intrance:'shopcar.html',shopCarList:shopCarList,proId:'0',specDetailId:'0',purchaseQuantity:0});
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>
